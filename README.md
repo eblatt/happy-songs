@@ -1,5 +1,7 @@
 # Happy Hits | Turn Up Tunes | Juicy Jams
 
+What song features predict happiness of a country?
+
 Raw:
 
 data.db- In this file, we have the database of every region's 200 top songs for every day for the year 2017. We plan to add information regarding the audio features of each song to this database by using Spotify's API. We found the data at https://www.kaggle.com/edumucelli/spotifys-worldwide-daily-song-ranking/version/3. 
