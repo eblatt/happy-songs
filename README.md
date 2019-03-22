@@ -1,6 +1,9 @@
 # Happy Hits | Turn Up Tunes | Juicy Jams
 
-What song features predict happiness of a country?
+What song features predict happiness of a country? What song features are more popular/are liked the most by the happiest countries?
+
+In this project, we plan to merge data on happiness by country and top Spotify songs per country from 2017 in order to answer these questions. So far, we've worked on merging the data based on country code. We plan to use a random sample of about 25 of the top 200 songs from a select number of countries, in order to cut down on some of the data. We will implement a supervised learning algorithm for our predictions and find correlations between happier countries and higher values of certain song features. We may use this data to do a sentiment analysis of top songs by region and measure how consistent it is with our happiness data. We eventually plan to present this data in a map-like visualization.
+
 
 Raw:
 
