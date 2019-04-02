@@ -82,10 +82,11 @@ with open('data.csv') as csv_file:
         #if ID is not already in the table:
             #make API CALL to get the feature values
             #print(song_id) #WHY IS IT GETTING CHANGED TO URL???
-        if not song_id == 'URL':
-            ids.append(song_id)
 
-        line_count += 1
+        if len(song_id) == 22:
+            ids.append(song_id)
+            line_count += 1
+    
         if line_count == 50:
             feature_set_50 = grab_features(ids)
             for song_features in feature_set_50:
@@ -98,6 +99,7 @@ with open('data.csv') as csv_file:
                 conn.commit()
             ids = []
             line_count = 0
+#if there isn't 50 at the end then it won't read the last few songs
             #print("new 50")
 
 
