@@ -3,150 +3,109 @@ import csv
 import sqlite3
 
 songs = {}
+country_codes = {}
+happiness = {}
 
-def open_csv(csv_file):
+def open_csv_songs(csv_file):
 	with open(csv_file) as f:
 		reader = csv.DictReader(f)
-		print(reader)
 		for row in reader:
-			# print(row['URL'].split('/')[4])
 			if row['Date'].split("-")[0] == '2017':
 				split = row['URL'].split('/')
 				spotify_id = split[len(split)-1]
 				songs[spotify_id] = row # 'Artist', 'URL', 'Region', 'Date', 'Streams', 'Track Name', 'Position'
-			# print(row[0])
 
+def open_csv_country(csv_file):
+	with open(csv_file) as f:
+		reader = csv.DictReader(f)
+		for row in reader:
+			#removing certain country prefixes
+			country_name = row['Name'].split(",")[0]
+			country_code = row['Code']
+			#special cases
+			if(country_code == 'cg'):
+				country_name = "Congo (Brazzaville)"
+			if(country_code == 'cd'):
+				country_name = "Congo (Kinshasa)"
+			# print(country_name, country_code)
+			country_codes[country_code] = country_name
+
+def open_csv_world_happiness(csv_file):
+	with open(csv_file) as f:
+		reader = csv.DictReader(f)
+		for row in reader:
+			country_name = row['Country']
+			# rank = info['Happiness.Rank']
+			# score = info['Happiness.Score']
+			# high = info['Whisker.high']
+			# low = info['Whisker.low']
+			# gdp = info['Economy..GDP.per.Capita']
+			# fam = info['Family']
+			# health = info['Health..Life.Expectancy']
+			# freedom = info['Freedom']
+			# gen = info['Generosity']
+			# trust = info['Trust..Government.Corruption']
+			# dys = info['Dystopia.Residual']
+			row.pop('Country')
+			happiness[country_name] = row
 
 def main():
-	print("hi")
-	open_csv("spotify-worldwide-daily.csv")
+	open_csv_songs("spotify-worldwide-daily.csv")
+	open_csv_country("country_codes.csv")
+	open_csv_world_happiness("world_happiness_2017.csv")
 	conn = sqlite3.connect('data.db')
 	conn.text_factory = str
-
 	c = conn.cursor()
-	c.execute('DROP TABLE IF EXISTS "songs"')
-	c.execute('CREATE TABLE songs(songid VARCHAR not null, artist VARCHAR not null, region VARCHAR not null, datee VARCHAR not null, position VARCHAR not null, PRIMARY KEY(songid))')
+
+	# if change made, must drop the table and re-add it
+	c.execute('DROP TABLE IF EXISTS songs')
+	c.execute('DROP TABLE IF EXISTS country_codes')
+	c.execute('DROP TABLE IF EXISTS happiness')
+
+	#Spotify's Worldwide Daily Song Ranking
+	c.execute('''CREATE TABLE IF NOT EXISTS songs(
+			     songid   VARCHAR NOT NULL,
+			     artist   VARCHAR NOT NULL,
+			     region   VARCHAR NOT NULL,
+			     datee    VARCHAR NOT NULL,
+			     position VARCHAR NOT NULL,
+			     PRIMARY KEY(songid)
+			  )''')
+
+	#countries with their 2 digit codes
+	c.execute('''CREATE TABLE IF NOT EXISTS country_codes(
+			     country_code   VARCHAR NOT NULL,
+			     country_name   VARCHAR NOT NULL,
+			     PRIMARY KEY(country_code)
+			  )''')
+
+	#World Happiness Report
+	c.execute('''CREATE TABLE IF NOT EXISTS happiness(
+			     country_name VARCHAR NOT NULL,
+			     rank         INTEGER NOT NULL,
+			     score        REAL NOT NULL,
+			     high         REAL NOT NULL,
+			     low          REAL NOT NULL,
+			     gdp          REAL NOT NULL,
+			     fam          REAL NOT NULL,
+			     health       REAL NOT NULL,
+			     freedom      REAL NOT NULL,
+			     gen          REAL NOT NULL,
+			     trust        REAL NOT NULL,
+			     dys          REAL NOT NULL,
+			     PRIMARY KEY(country_name)
+			  )''')
+
+	#insert data to tables
 	for song_id, info in songs.items():
-		c.execute('INSERT INTO songs VALUES(?,?,?,?,?)', (song_id, info['Artist'], info['Region'], info['Date'],  info['Position'] ))
+		c.execute('INSERT INTO songs VALUES(?,?,?,?,?)', (song_id, info['Artist'], info['Region'], info['Date'],  info['Position']))
+	for country_code, country_name in country_codes.items():
+		c.execute('INSERT INTO country_codes VALUES (?,?)', (country_code, country_name))
+	for country_name, info in happiness.items():
+		c.execute('INSERT INTO happiness VALUES(?,?,?,?,?,?,?,?,?,?,?,?)', (country_name, info['Happiness.Rank'], info['Happiness.Score'], info['Whisker.high'], info['Whisker.low'], info['Economy..GDP.per.Capita.'], info['Family'], info['Health..Life.Expectancy.'], info['Freedom'], info['Generosity'], info['Trust..Government.Corruption.'], info['Dystopia.Residual']))
+
+	#commit changes and close
 	conn.commit()
+	conn.close()
+
 main()
-# '''
-
-# Input: JSON file
-# Output: dictionary that uses the titles as keys and book descriptions as values
-
-# '''
-# def make_book_dict(json_file):
-# 	book_dict = {}
-
-# 	json_data = json.load(open(json_file))
-# 	for element in json_data:
-# 		title = element["title"]
-# 		book_dict[title] = element["description"]
-
-# 	return book_dict
-
-# '''
-
-# Input: CSV file
-# Output: dictionary with keywords as keys and associated genres and points as the values
-
-# '''
-# def make_keyword_dict(csv_file):
-# 	keyword_dict = {}
-
-# 	with open(csv_file) as f:
-# 		reader = csv.DictReader(f)
-# 		for row in reader:
-# 			keyword = row[" Keyword"].lstrip() 
-# 			genre = row["Genre"]
-# 			points = int(row[" Points"])
-# 			if keyword not in keyword_dict:
-# 				keyword_dict[keyword] = [(genre, points)]
-# 			else:
-# 				keyword_dict[keyword].append((genre, points))
-
-# 	return keyword_dict
-
-# '''
-# Input: JSON file and CSV file
-# Output: The title of the book and the three highest genres based on keywords in the desctiption
-# '''
-# def make_genres(json_file,csv_file):
-	
-# 	'''
-# 	Initially, I read all the data from the JSON and csv files, 
-# 	and put the info into dictionaries so that it is easier to interpret
-# 	the data.
-# 	'''
-
-# 	book_dict = make_book_dict(json_file) # book: description
-# 	keyword_dict = make_keyword_dict(csv_file) #keyword: [(genre,points)]
-# 	books_and_genres = {} #title: [(genre, points for every new word, number of keywords found, number of new keywords found)]
-# 	new_genre = True 
-	
-
-# 	# for each title, I find the keywords and then add the value of the keywords together
-# 	for title in book_dict.keys():		
-# 		description = book_dict[title]
-# 		visited_kw = set()
-# 		for keyword in keyword_dict.keys():
-# 			x = description.find(keyword)
-# 			while (x != -1):
-# 				x = description.find(keyword,x+len(keyword)) # finding the keyword
-# 				for (genre,points) in keyword_dict[keyword]:
-# 					if title not in books_and_genres.keys():
-# 						books_and_genres[title] = [(genre, points,1,1)] #adding to dictionary
-# 					else:
-# 						# adding additional genres to the dictionary
-# 						for (prev_genre,prev_pts,hits,avg) in books_and_genres[title]:
-# 							#if the keyword is for a genre that has already been matched, just keep adding
-# 							if genre == prev_genre:
-# 								if keyword not in visited_kw:
-# 									books_and_genres[title].append((genre,prev_pts+points, hits+1,avg+1))
-# 									books_and_genres[title].remove((genre,prev_pts,hits,avg))
-# 									new_genre = False
-# 									break
-# 								else:
-# 									books_and_genres[title].append((genre,prev_pts, hits+1,avg))
-# 									books_and_genres[title].remove((genre,prev_pts,hits,avg))
-# 									new_genre = False
-# 									break
-# 						# otherwise, add to the dictionary
-# 						if new_genre is True:
-# 							books_and_genres[title].append((genre, points, 1,1))
-# 							new_genre = True
-# 				visited_kw.add(keyword)
-
-# 	#alphabetic order and top three genres
-# 	for book_title in sorted(books_and_genres.keys()):
-# 		print(book_title)
-# 		sorted_genres = {}
-# 		max_pts = float("-inf")
-# 		l =[]
-# 		for info in books_and_genres[book_title]:
-# 			(genre,points,hits,avg) = info
-# 			score = (points/avg)*hits
-# 			sorted_genres[score] = genre
-# 			l.append(score)
-# 			counter = 0 
-# 			while l and counter < 3 :
-# 				max_score = max(l)
-# 				print((sorted_genres[max_score],max_score))
-# 				l.remove(max_score)
-# 				counter+=1
-			
-
-
-# def main():                      
-#    make_genres("sample_book_json.txt","sample_genre_keyword_value.csv")
-
-# main() 
-
-
-
-
-
-
-
-
