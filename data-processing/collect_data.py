@@ -27,7 +27,6 @@ def open_csv_country(csv_file):
 				country_name = "Congo (Brazzaville)"
 			if(country_code == 'cd'):
 				country_name = "Congo (Kinshasa)"
-			# print(country_name, country_code)
 			country_codes[country_code] = country_name
 
 def open_csv_world_happiness(csv_file):
@@ -35,17 +34,6 @@ def open_csv_world_happiness(csv_file):
 		reader = csv.DictReader(f)
 		for row in reader:
 			country_name = row['Country']
-			# rank = info['Happiness.Rank']
-			# score = info['Happiness.Score']
-			# high = info['Whisker.high']
-			# low = info['Whisker.low']
-			# gdp = info['Economy..GDP.per.Capita']
-			# fam = info['Family']
-			# health = info['Health..Life.Expectancy']
-			# freedom = info['Freedom']
-			# gen = info['Generosity']
-			# trust = info['Trust..Government.Corruption']
-			# dys = info['Dystopia.Residual']
 			row.pop('Country')
 			happiness[country_name] = row
 
@@ -58,17 +46,19 @@ def main():
 	c = conn.cursor()
 
 	# if change made, must drop the table and re-add it
-	c.execute('DROP TABLE IF EXISTS songs')
-	c.execute('DROP TABLE IF EXISTS country_codes')
-	c.execute('DROP TABLE IF EXISTS happiness')
+	# c.execute('DROP TABLE IF EXISTS songs')
+	# c.execute('DROP TABLE IF EXISTS country_codes')
+	# c.execute('DROP TABLE IF EXISTS happiness')
 
 	#Spotify's Worldwide Daily Song Ranking
 	c.execute('''CREATE TABLE IF NOT EXISTS songs(
 			     songid   VARCHAR NOT NULL,
+			     track    VARCHAR NOT NULL,
 			     artist   VARCHAR NOT NULL,
 			     region   VARCHAR NOT NULL,
 			     datee    VARCHAR NOT NULL,
 			     position VARCHAR NOT NULL,
+			     streams  INTEGER NOT NULL,
 			     PRIMARY KEY(songid)
 			  )''')
 
@@ -98,7 +88,7 @@ def main():
 
 	#insert data to tables
 	for song_id, info in songs.items():
-		c.execute('INSERT INTO songs VALUES(?,?,?,?,?)', (song_id, info['Artist'], info['Region'], info['Date'],  info['Position']))
+		c.execute('INSERT INTO songs VALUES(?,?,?,?,?,?,?)', (song_id, info['Track Name'],info['Artist'], info['Region'], info['Date'],  info['Position'], info['Streams']))
 	for country_code, country_name in country_codes.items():
 		c.execute('INSERT INTO country_codes VALUES (?,?)', (country_code, country_name))
 	for country_name, info in happiness.items():
