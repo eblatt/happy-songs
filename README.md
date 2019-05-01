@@ -20,11 +20,11 @@ Blog post 2
 
 We started off by trying to do a k-means clustering on 20 random songs that have two features-- a feature of the song(energy, loudness, etc.) and the happiness score of the country where that song was the top daily song. One initial hypothesis we were working with was that higher energy and louder songs would correlate with lower happiness countries as they would use energetic music as an outlet//escape. We ended up not finding any strong correlations, as you can see in the visualizations below. 
 
-<img src="visual_1.jpg">
+<img src="visual_1.png">
 
 Next, we tried a multiple linear regression analysis instead. We looked at the features with the lowest p values and highest coefficients, and we played around with analyzing different combinations of features. We mostly found that no feature's presence or absence altered our results//helped us better predict happiness as much as speechiness' did. See results below.
 
-<img src="visual_2.jpg">
+<img src="visual_2.png">
 
 Challenges that we're facing and how we're moving forward:
   1) So far, the hardest part of the project has been handling very large datasets. One dataset that we are using has 53 countries top 200 daily songs for everyday of the year 2017-- that’s more than 2 million rows. We then had to merge that with the features we found for those songs using the Spotify API. Deciding how many of the data points we actually want to use has been an ongoing struggle. For example, we had trouble deciding whether we should choose top songs randomly or pick the top 10 daily songs rather than 200. Also, when we tried to visualize the data, there were way too many datapoints, so we have to decide new ways of visualizing this data in meaningful ways. 
