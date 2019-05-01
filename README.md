@@ -63,4 +63,5 @@ What techniques were used to pick apart the data?
 Did you use ML? Stats? 
 
 How did you visualize your data?
+<img src="Screen Shot 2019-05-01 at 3.52.48 AM.png">
 
