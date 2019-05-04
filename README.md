@@ -38,7 +38,7 @@ What song features predict happiness of a country? What song features are more p
 
 In our exploration, we found that speechiness is the most significant feature that predicts happiness in a country. Speechiness is measured on a continous scale from 0-1, and we found that .1 more unit of speechiness in a song predicts that it is ~17 times more likely to be from a country with a higher happiness score.
 
-Data: 
+### Data: 
 What data did you use? 
   We merged 3 datasets:
   
@@ -54,7 +54,7 @@ Relative to its size was there enough information contained within it?
 Were you able to find what you wanted in the data? How did you collect, clean, and integrate it?
 - We found two of the datasets (Top songs and world happiness report) on Kaggle, where it had already been cleaned. After parsing down the top spotify songs data set (so that there were no repeat songs), and so that we only looked at every 5th song (because the set was too big), we merged this with the happiness table based on country code/region. In every row of this table, we had a song and data relevant to the country that it appeared in a top chart for. Then we gathered the audio features for each song from the Spotify API and added them to the table.
   
-Methodology: 
+### Methodology: 
 What did you do with your data? 
 
 What techniques were used to pick apart the data? 
