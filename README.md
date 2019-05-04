@@ -46,7 +46,11 @@ What data did you use?
 
   - Top Spotify Songs 2017: top 200 songs per country per day
 
-  - Spotify Audio Features: each song has values between 0-1 for features such as energy, danceability, acousticness, etc. for each song
+  - Spotify Audio Features: each song has 13 features: 
+      -energy   -danceability   -acousticness   -key   -loudness
+      -speechiness (presence of spoken word)  -instrumentalness
+      -valence  tempo -liveness (presence of audience)  -duration
+    These features were measured by the Spotify API itself, and for the most part ranged from 0 to 1.
 
 Relative to its size was there enough information contained within it? 
 - Although there are around 195 countries, The World Happiness report only had data on 155 of them. This wasn't an issue however, because we happened to be more limited by the lack of countries that Spotify had data for. Top songs had 200 top songs per day per country which meant that there were over 2 million rows in the table. This was too much data, which was going to affect our p value in an artifical way, so we parsed that down. Even with this huge amount of data, it didn't completely have everything we needed. Spotify is not available in a lot of the countries with the lowest happiness scores, therefore we don't have a lot of the data on the least happy countries' top songs.
@@ -56,10 +60,10 @@ Were you able to find what you wanted in the data? How did you collect, clean, a
   
 ### Methodology: 
 What did you do with your data? 
+- Now that we had our data collected, we wanted to see if we could point out the features of songs that made a difference.
+What techniques were used to pick apart the data? Did you use ML? Stats? 
+- We originally tried KNN and Multiple Linear Regression (refer to Blog Post 2). As a final step, we tried logistic regression using data from the top 10 happiest country and the bottom 10 least happy countries. 
 
-What techniques were used to pick apart the data? 
-
-Did you use ML? Stats? 
 
 How did you visualize your data?
 <img src="Screen Shot 2019-05-01 at 3.52.48 AM.png">
