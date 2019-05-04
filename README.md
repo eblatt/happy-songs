@@ -62,7 +62,8 @@ Were you able to find what you wanted in the data? How did you collect, clean, a
 What did you do with your data? 
 - Now that we had our data collected, we wanted to see if we could point out the features of songs that made a difference.
 What techniques were used to pick apart the data? Did you use ML? Stats? 
-- We originally tried KNN and Multiple Linear Regression (refer to Blog Post 2). As a final step, we tried logistic regression using data from the top 10 happiest country and the bottom 10 least happy countries. 
+- We originally tried KNN and Multiple Linear Regression (refer to Blog Post 2). As a final step, we tried logistic regression using data from the top 10 happiest country and the bottom 10 least happy countries. Other significant features according to a t-test and our logistic regression analysis were acousticness, liveness, instrumentalness, valence, duration, and tempo, however an increased unit of any of this features did not have as significant of an impact on predicting happiness score as speechiness did.
+
 
 
 How did you visualize your data?
