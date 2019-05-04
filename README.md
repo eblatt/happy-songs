@@ -33,7 +33,7 @@ Challenges that we're facing and how we're moving forward:
 
 
 ## Final Blog Post:
-Vision: 
+### Vision: 
 What song features predict happiness of a country? What song features are more popular/are liked the most by the happiest countries? By using data from 2017 on the happiness of countries, the top Spotify songs for these countries, and their audio features we conducted learning algorithms to find correlations between country happiness and song audio features.
 
 In our exploration, we found that speechiness is the most significant feature that predicts happiness in a country. Speechiness is measured on a continous scale from 0-1, and we found that .1 more unit of speechiness in a song predicts that it is ~17 times more likely to be from a country with a higher happiness score.
@@ -51,9 +51,8 @@ What data did you use?
 Relative to its size was there enough information contained within it? 
 - Although there are around 195 countries, The World Happiness report only had data on 155 of them. This wasn't an issue however, because we happened to be more limited by the lack of countries that Spotify had data for. Top songs had 200 top songs per day per country which meant that there were over 2 million rows in the table. This was too much data, which was going to affect our p value in an artifical way, so we parsed that down. Even with this huge amount of data, it didn't completely have everything we needed. Spotify is not available in a lot of the countries with the lowest happiness scores, therefore we don't have a lot of the data on the least happy countries' top songs.
 
-Were you able to find what you wanted in the data? 
-How did you collect, clean, and integrate it?
-    We found two of the datasets (Top songs and world happiness report) on Kaggle, where it had already been cleaned. After parsing down the top spotify songs data set (so that there were no repeat songs, and so that we only looked at every 5th song (because the set was too big)we merged this with the happiness table based on country code. In every row of this table, we had a song and data relevant to the country that it appeared in a top chart for. Then we gathered the audio features for each song from the Spotify API and added them to the table.
+Were you able to find what you wanted in the data? How did you collect, clean, and integrate it?
+- We found two of the datasets (Top songs and world happiness report) on Kaggle, where it had already been cleaned. After parsing down the top spotify songs data set (so that there were no repeat songs), and so that we only looked at every 5th song (because the set was too big), we merged this with the happiness table based on country code/region. In every row of this table, we had a song and data relevant to the country that it appeared in a top chart for. Then we gathered the audio features for each song from the Spotify API and added them to the table.
   
 Methodology: 
 What did you do with your data? 
