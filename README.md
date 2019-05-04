@@ -1,6 +1,6 @@
 # Happy Hits | Turn Up Tunes | Juicy Jams
 
-Blog Post 1
+## Blog Post 1
 
 What song features predict happiness of a country? What song features are more popular/are liked the most by the happiest countries?
 
@@ -16,7 +16,7 @@ world_happiness_report.csv- In this file, we have the happiness rankings of 155 
 country_codes.csv = In this file, we have country names along with their country codes. We found the data at https://datahub.io/core/country-list#resource-country-list_zip
 
 
-Blog post 2
+## Blog Post 2
 
 We started off by trying to do a k-means clustering on 20 random songs that have two features-- a feature of the song(energy, loudness, etc.) and the happiness score of the country where that song was the top daily song. One initial hypothesis we were working with was that higher energy and louder songs would correlate with lower happiness countries as they would use energetic music as an outlet//escape. We ended up not finding any strong correlations, as you can see in the visualizations below. 
 
@@ -32,11 +32,11 @@ Challenges that we're facing and how we're moving forward:
    3) We have been concerned about but have not yet had to tackle directly is whether or not we will actually be able to make a sound conclusion. Social science research tends to have a low R-squared value, meaning that the model does not explain much of the variability in the data. Happiness is not a measurable thing, so finding a way to interpret the data in a meaningful way when there are many other variables that impact the output seems like it will be a daunting task. 
 
 
-Final Blog Post:
+## Final Blog Post:
 Vision: 
 What song features predict happiness of a country? What song features are more popular/are liked the most by the happiest countries? By using data from 2017 on the happiness of countries, the top Spotify songs for these countries, and their audio features we conducted learning algorithms to find correlations between country happiness and song audio features.
 
-In our exploration, we found that Speechiness is the most significant feature that predicts happiness in a country. Speechiness is measured on a continous scale from 0-1, and we found that .1 more unit of speechiness in a song predicts that it is 17 times more likely to be from a country with a higher happiness score.
+In our exploration, we found that speechiness is the most significant feature that predicts happiness in a country. Speechiness is measured on a continous scale from 0-1, and we found that .1 more unit of speechiness in a song predicts that it is ~17 times more likely to be from a country with a higher happiness score.
 
 Data: 
 What data did you use? 
