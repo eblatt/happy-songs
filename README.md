@@ -65,6 +65,9 @@ What techniques were used to pick apart the data? Did you use ML? Stats?
 - We originally tried KNN and Multiple Linear Regression (refer to Blog Post 2). As a final step, we tried logistic regression using data from the top 10 happiest country and the bottom 10 least happy countries. Other significant features according to a t-test and our logistic regression analysis were acousticness, liveness, instrumentalness, valence, duration, and tempo, however an increased unit of any of this features did not have as significant of an impact on predicting happiness score as speechiness did.
 <img src="Logistic Reg.png">
 
+We can see that given 2 songs (all else equal), a song with a unit higher speechiness has 17.41 times higher odds of being a song from a 10 happy country. Furthermore, we see that the average of speechiness of 10 unhappy countries is lower than that of 10 happy countries with statistical significance.
+<img src="Speechiness.png">
+
 
 
 How did you visualize your data?
