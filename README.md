@@ -68,8 +68,15 @@ What techniques were used to pick apart the data? Did you use ML? Stats?
 We can see that given 2 songs (all else equal), a song with a unit higher speechiness has 17.41 times higher odds of being a song from a 10 happy country. Furthermore, we see that the average of speechiness of 10 unhappy countries is lower than that of 10 happy countries with statistical significance.
 <img src="Speechiness.png">
 
+### Visualization
+We had a D3 interactive map that showed the happiness score, avg speechiness and top song of every country (if we had data on them):
 
-
-How did you visualize your data?
 <img src="Screen Shot 2019-05-01 at 3.52.48 AM.png">
+
+We also used a radar chart to show the avg speechiness of the top 4 countries and bottom 4 countries in the happiness scale:
+
+We also used a scatter plot to show the avg speechiness of the top 7 countries and bottom 7 countries in the happiness scale:
+
+Lastly, we plotted bar charts of the average and standard deviation of several of the significant features that came up with logistic regression:
+
 
