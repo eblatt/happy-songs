@@ -73,10 +73,14 @@ We had a D3 interactive map that showed the happiness score, avg speechiness and
 
 <img src="Screen Shot 2019-05-01 at 3.52.48 AM.png">
 
-We also used a radar chart to show the avg speechiness of the top 4 countries and bottom 4 countries in the happiness scale:
+We also used a radar chart to show the avg speechiness of the top 4 countries and bottom 4 countries in the happiness scale. Note Switzerland's avg speechiness (top happy) as opposed to Greece's avg speechiness (least happy):
 
-We also used a scatter plot to show the avg speechiness of the top 7 countries and bottom 7 countries in the happiness scale:
+<img src="Radar.png">
+
+We also used a scatter plot to show the avg speechiness of the top 7 countries and bottom 7 countries in the happiness scale. Note how they cluster:
+
+<img src="Scatterplot.png">
 
 Lastly, we plotted bar charts of the average and standard deviation of several of the significant features that came up with logistic regression:
 
-
+<img src="BarChart.png">
